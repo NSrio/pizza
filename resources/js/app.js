@@ -1,1 +1,1 @@
-console.log('Hello form app.js')
+console.log('Hello from app.js')
