@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')(session)
+const passport = require('passport')
 
 //Data connection
 
@@ -21,6 +22,12 @@ connection.once('open',()=>{
     console.log('connection failed...')
 });
 
+
+// Passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 // Session store
 
 let mongoStore = new MongoDbStore({
