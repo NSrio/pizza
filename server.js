@@ -23,11 +23,7 @@ connection.once('open',()=>{
 });
 
 
-// Passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
-app.use(passport.initialize())
-app.use(passport.session())
+
 // Session store
 
 let mongoStore = new MongoDbStore({
@@ -42,9 +38,15 @@ app.use(session({
     store: mongoStore,
     saveUninitialized:false,
     store :mongoStore,
-    cookie :{ maxAge:1000*60*60*24}  // life duration of cookie                 
+    cookie :{ maxAge:1000*60*60*3}  // life duration of cookie                 
 }))
 
+
+// Passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(flash())
 
 // Assets
@@ -57,6 +59,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use((req,res,next)=>{
     res.locals.session = req.session
+    res.locals.user = req.user
     next()
 })
 
