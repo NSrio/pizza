@@ -55,7 +55,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 
-// Global middleware
+// Global middleware to access data in fronted
 
 app.use((req,res,next)=>{
     res.locals.session = req.session

@@ -393,3 +393,7 @@ section.auth a:hover {
   padding-left: 8px;
 }
 
+a.link {
+  color: #fe5f1e;
+}
+
