@@ -2,6 +2,6 @@ function guest(req,res,next){
     if(!req.isAuthenticated()){
         return next()
     }
-    return res.redirected('/')
+    return res.redirect('/')
 }
 module.exports = guest

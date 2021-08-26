@@ -1,0 +1,25 @@
+const order = require('../../../dbTable/order')
+
+function orderController(){
+    return {
+
+        index(req,res){
+            order.find({status:{$ne: 'completed'}},null,{sort:{'createdAt':-1}}).
+            populate('customerId','-password').exec((err,orders)=>{
+                if(req.xhr){
+
+                    res.json(orders)
+                } else {
+
+                    res.render('admin/orders')
+                }
+                
+                
+            })
+
+        }
+    }
+
+}
+
+module.exports = orderController

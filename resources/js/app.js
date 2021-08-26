@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Noty from 'noty'
+import { initAdmin } from './admin'
 
 
 
@@ -43,6 +44,8 @@ if(alertMsg) {
         alertMsg.remove()
     }, 2000)
 }
+
+initAdmin()
    
    
    
