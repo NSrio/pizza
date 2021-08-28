@@ -1,6 +1,7 @@
 
 const Order = require('../../../dbTable/order')
 const moment = require ('moment')
+//const order = require('../../../dbTable/order')
 
 function orderController() {
     return {
@@ -26,15 +27,23 @@ function orderController() {
                
             })
             order.save().then((result)=>{
+                Order.populate(result,{path : 'customerId'},(err,placedOrder)=>{
 
-                req.flash('success','Order palced successfully')
-                delete req.session.cart
-                return res.redirect('/customers/orders')
+                    req.flash('success','Order palced successfully')
+                    delete req.session.cart
+                    // Emit
+                    const eventEmitter = req.app.get('eventEmitter')
+                    eventEmitter.emit('orderPlaced', placedOrder)
+
+
+                    return res.redirect('customers/orders')
+                })
+                
 
             }).catch(err=>{
 
                 req.flash('error','Something went wrong')
-                return res.redirect('/cart')
+                return res.redirect('cart')
             })
 
 
@@ -48,7 +57,27 @@ function orderController() {
             res.header('Cache-Control', 'no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0')                                                   // is used to sort out the order item according to latest
             res.render('customers/orders',{orders: orders, moment : moment})
 
-        }
+        },
+
+        async show(req,res){
+
+            //console.log(req.params.id)
+
+           
+            const order = await Order.findById(req.params.id)
+            console.log(order)
+             
+
+            // To check an authorize user
+
+            if(req.user._id.toString() === order.customerId.toString()){
+
+                return res.render('customers/singleOrder',{ order })
+            }
+
+                return res.redirect('/')
+
+        } 
 
     }
 }

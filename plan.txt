@@ -12,32 +12,33 @@
 
 
     
-[.] Install tailwind css
-[.] Create Home page using Html and css
+[+] Install tailwind css
+[+] Create Home page using Html and css
     - include tailwind css
-[.] Create cart page
+[+] Create cart page
     - order summary section
     - empty cart section
-[.] Create Order controller and link it in server.js
-[.] Create orders view with table for customer and admin
-[.] Create orderssingle page with status
-[.] Create login page with route
-[.] Create register page with route
-[.] Build register crud
+[+] Create Order controller and link it in server.js
+[+] Create orders view with table for customer and admin
+
+[+] Create login page with route
+[+] Create register page with route
+[+] Build register crud
     - dependancies express-flash express-session cookie-parser dotenv
     - status code articles http:\www.restapitutorial.com/httpstatuscodes
     - Database connection. dependancies mongoose
-[.] Build login using passort
+[+] Build login using passort
     - install dependancies pasport passort-local express-session
-[.] Create menu model and put dummy Data
-[.] Fetch all pizzas from db and show on home page
-[.] Add to cart functionality
+[+] Create menu model and put dummy Data
+[+] Fetch all pizzas from db and show on home page
+[+] Add to cart functionality
     - use connect-mongo for session store
     - axios to sent ajax request
     - install notification library npm i noty
-[.] Make order on carts page
+[+] Make order on carts page
 [.] Place order functionality
 [.] Order tracker
     - dependancies moment
 [.] socket connection
     - dependancies socket.io 
+[.] Create orderssingle page with status

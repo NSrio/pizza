@@ -96,7 +96,7 @@ function authController()
             user.save().then((user)=>{
 
                 // Further Upgrade Loggin
-                return res.redirect('/')
+                return res.redirect('/login')
 
             }).catch(err=>{
 
