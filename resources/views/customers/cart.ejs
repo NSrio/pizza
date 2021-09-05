@@ -2,7 +2,7 @@
     <% if(!session.cart){ %>
     
         <div class="empty-cart py-16">
-        <div class="container mx-auto text-center">
+        <div class=" container mx-auto text-center">
             <h1 class="text-3xl font-bold mb-6">Cart Empty☹️</h1>
             <p class="text-gray-500 text-lg">You probably haven't ordered yet.<br>
             To order a pizza, go to the main page.
@@ -12,7 +12,7 @@
         </div>
     </div>
     <%} else {%>
-    <div class="order mx-auto w-1/2 mt-10">
+    <div class="order container  mx-auto xl:w-1/2 mt-10">
         <div class="flex items-center border-b border-grey-300 pb-4">
             <img class="h-10 w-14"src="/img/cart-black.png" alt="">
             <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
@@ -26,7 +26,7 @@
                     <h1><%=pizza.item.name%></h1>
                     <span><%=pizza.item.size%></span>
                 </div>
-                <span class="flex-1"><%=pizza.qty%></span>
+                <span class="flex-1">Pcs <%=pizza.qty%></span>
                 <span class="font-bold text-2xl">₹<%=pizza.item.price * pizza.qty %></span>
             </div>
             <%}%>
@@ -40,10 +40,20 @@
             </div>
             <% if(user) { %>
             <div>
-                <form action="/orders" method = "POST" class="mt-12">
-                    <input class="border border-grey-400 p-2 w-1/2" name = "phone" type="text" placeholder="Phone">
-                    <input class="border border-grey-400 p-2 w-1/2" name = "address"  type="text" placeholder="Address">
+                <form action="/orders" method = "POST" class="mt-12" id = "payment-form">
+                    <div class="relative w-1/2 ml-auto mb-4">
+                        <select id="paymentType" name="paymentType" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                          <option value="cod">Cash on delivery</option>
+                          <option value="card">Pay with card</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                      </div >
+                    <input name = "phone" class="border border-grey-400 p-2 w-1/2 mb-4"  type="text" placeholder="Phone">
+                    <input name = "address" class="border border-grey-400 p-2 w-1/2"   type="text" placeholder="Address">
                     <div>
+                        <div id = "card-element" class = "mt-4"></div>
                         <button class="px-6 py-2 rounded-full text-white mt-6 font-bold btn-primary" type="submit">Order Now</button>
                     </div>
                 </form>

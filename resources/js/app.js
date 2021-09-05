@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Noty from 'noty'
+import { initStipe } from './stripe'
 import { initAdmin } from './admin'
 import moment from 'moment'
 
@@ -92,10 +93,14 @@ function updateStatus(order){
 //initAdmin()
 updateStatus(order)
 
+
+// Ajex call for order
+
+initStipe()
+
 // socket 
 
 let socket = io()
-initAdmin(socket)
 
 
 // Join 
@@ -106,7 +111,8 @@ if(order)
 
 let adminAreaPath = window.location.pathname
 if(adminAreaPath.includes('admin')){
-
+    
+    initAdmin(socket)
     socket.emit('join','adminRoom')
 }
 
