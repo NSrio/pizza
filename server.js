@@ -81,6 +81,9 @@ app.set('view engine','ejs')
 // Routes Settings
 
 require('./routes/web.js')(app)
+app.use((req,res)=>{
+    res.status(404).render('errors/404')
+})
 
 const server = app.listen(PORT,()=>
 {
